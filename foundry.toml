@@ -1,6 +1,49 @@
 [profile.default]
-src = "src"
-out = "out"
-libs = ["lib"]
+solc_version = '0.8.22'
+# The source directory
+src = 'contracts'
+# The artifact directory
+out = 'out'
+# A list of paths to look for libraries in
+libs = ['lib']
+# The test directory
+test = 'test'
+# Whether to cache builds or not
+cache = true
+# The cache directory if enabled
+cache_path = 'forge-cache'
+# Import statement remappings
+remappings = [
+  'forge-std/=lib/forge-std/src',
+  'hyperdrive/=lib/hyperdrive/contracts/',
+]
+# gas limit - max u64
+gas_limit = "18446744073709551615"
+# allows the ffi to be used
+ffi = true
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+[profile.production]
+# strict warnings
+deny_warnings = true
+# optimizer settings
+optimizer = true
+optimizer_runs = 10000000
+via_ir = false
+# Enable gas-reporting for all contracts
+gas_reports = ["*"]
+evm_version = "paris"
+verbosity = 4
+
+[profile.lite]
+optimizer = false
+via_ir = false
+
+[fuzz]
+runs = 1000
+
+[rpc_endpoints]
+mainnet = "${MAINNET_RPC_URL}"
+gnosis = "${GNOSIS_RPC_URL}"
+sepolia = "${SEPOLIA_RPC_URL}"
+optimism_sepolia = "${OPTIMISM_SEPOLIA_RPC_URL}"

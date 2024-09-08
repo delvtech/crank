@@ -1,14 +1,69 @@
-# Compiler files
 cache/
 out/
+forge-cache/
+.vscode/
+broadcast
+node_modules/
+yarn-error.log
 
-# Ignores development broadcast logs
-!/broadcast
-/broadcast/*/31337/
-/broadcast/**/dry-run/
+# Hardhat
+artifacts/
 
-# Docs
-docs/
+# random files on MacOs
+.DS_Store
 
-# Dotenv file
-.env
+# python build
+*.egg-info
+.cache
+.build
+.python-version
+.venv
+build/
+dist/
+python/hyperdrivetypes/hyperdrivetypes/types
+
+# nix/shell extension - https://direnv.net/
+.direnv
+
+# vim
+remappings.txt
+
+# code coverage
+lcov.info
+coverage_report/
+
+# Ape
+.cache
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# pytest
+.pytest_cache
+
+# The generated reproduction test.
+test/Generated.t.sol
+
+# Rust
+target/
+crates/hyperdrive-wrappers/src/wrappers/
+
+# Crash Reports
+crash_report.json
+
+# Environment files
+*.env
+!*sample.env
+
+# Hardhat Artifacts
+artifacts
+deployments/
+
+# Local network deployment addresses
+*.local.json
+
+# etherscan debugging
+etherscan_requests/
+
+# todos
+TODO.md
