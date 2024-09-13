@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.22;
 
+import { IHyperdrive } from "hyperdrive/src/interfaces/IHyperdrive.sol";
 import { IMomo } from "./interfaces/IMomo.sol";
 import { MOMO_KIND, VERSION } from "./libraries/Constants.sol";
 
@@ -16,13 +17,7 @@ contract Momo is IMomo {
     // │ Storage                                                 │
     // ╰─────────────────────────────────────────────────────────╯
 
-    // ───────────────────────── Immutables ──────────────────────
-
-    /// @dev Name of the Momo token.
-    string public _name;
-
-    /// @dev Symbol of the Momo token.
-    string internal _symbol;
+    // ───────────────────────── Constants ───────────────────────
 
     /// @notice The kind of the Momo vault.
     string public constant kind = MOMO_KIND;
@@ -30,7 +25,21 @@ contract Momo is IMomo {
     /// @notice The version of the Momo vault.
     string public constant version = VERSION;
 
+    // ───────────────────────── Immutables ──────────────────────
+
+    /// @notice The Hyperdrive pool to buy longs from.
+    IHyperdrive public immutable longPositionSource;
+
+    /// @notice The Hyperdrive pool to buy shorts from.
+    IHyperdrive public immutable shortPositionSource;
+
     // ─────────────────────────── State ────────────────────────
+
+    /// @dev Name of the Momo token.
+    string public name;
+
+    /// @dev Symbol of the Momo token.
+    string public symbol;
 
     /// @dev Address of the contract admin.
     address public admin;
@@ -52,12 +61,23 @@ contract Momo is IMomo {
     // ╰─────────────────────────────────────────────────────────╯
 
     /// @notice Instantiates the Momo vault.
-    /// @param __name Name of the Momo vault token.
-    /// @param __symbol Symbol of the Momo vault token.
-    constructor(string memory __name, string memory __symbol) {
+    /// @param _name Name of the Momo vault token.
+    /// @param _symbol Symbol of the Momo vault token.
+    /// @param _longPositionSource The Hyperdrive pool to buy long positions from.
+    /// @param _shortPositionSource The Hyperdrive pool to buy short positions from.
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        IHyperdrive _longPositionSource,
+        IHyperdrive _shortPositionSource
+    ) {
         // Set the name and symbol.
-        _name = __name;
-        _symbol = __symbol;
+        name = _name;
+        symbol = _symbol;
+
+        // Set the position sources.
+        longPositionSource = _longPositionSource;
+        shortPositionSource = _shortPositionSource;
 
         // Set the admin to the contract deployer.
         admin = msg.sender;
