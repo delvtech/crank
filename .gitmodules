@@ -4,3 +4,9 @@
 [submodule "lib/hyperdrive"]
 	path = lib/hyperdrive
 	url = https://github.com/delvtech/hyperdrive
+[submodule "lib/solady"]
+	path = lib/solady
+	url = https://github.com/Vectorized/solady
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
